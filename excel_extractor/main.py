@@ -79,6 +79,56 @@ def extract_fields(file_path):
     observer = df.iloc[8, 3]
     email = df.iloc[8, 18]
     location = df.iloc[14, 4]
+    elevation_value = df.iloc[17, 21]
+    elevation_unit = df.iloc[17, 22]
+    aperture_value = df.iloc[19, 4]
+    aperture_unit = df.iloc[19, 7]
+    telescope_f_ratio = df.iloc[19, 11]
+    telescope_magnification = df.iloc[19, 15]
+    telescope_type = df.iloc[19, 19]
+    timing = df.iloc[21, 4]
+    timing_device = df.iloc[22, 4]
+    method = df.iloc[21, 14]
+    ote_used = df.iloc[22, 14]
+    asteroid_visible = df.iloc[21, 26]
+    detector = df.iloc[24, 4]
+    video_format = df.iloc[24, 11]
+    exposure_integration = df.iloc[24, 15]
+    other_detector_info = df.iloc[24, 21]
+    clouds = df.iloc[26, 7]
+    stability = df.iloc[26, 15]
+    other_conditions = df.iloc[26, 23]
+    started_observing_hh = df.iloc[30, 5]
+    started_observing_mm = df.iloc[30, 7]
+    started_observing_ss = df.iloc[30, 9]
+    uncorrected_disappearance_hh = df.iloc[31, 5]
+    uncorrected_disappearance_mm = df.iloc[31, 7]
+    uncorrected_disappearance_ss = df.iloc[31, 9]
+    corrected_disappearance_hh = df.iloc[32, 5]
+    corrected_disappearance_mm = df.iloc[32, 7]
+    corrected_disappearance_ss = df.iloc[32, 9]
+    corrected_reappearance_hh = df.iloc[34, 5]
+    corrected_reappearance_mm = df.iloc[34, 7]
+    corrected_reappearance_ss = df.iloc[34, 9]
+    uncorrected_reappearance_hh = df.iloc[35, 5]
+    uncorrected_reappearance_mm = df.iloc[35, 7]
+    uncorrected_reappearance_ss = df.iloc[35, 9]
+    stopped_observing_hh = df.iloc[36, 5]
+    stopped_observing_mm = df.iloc[36, 7]
+    stopped_observing_ss = df.iloc[36, 9]
+    accuracy_disappearance_683 = df.iloc[32, 11]
+    accuracy_disappearance_95 = df.iloc[32, 12]
+    accuracy_disappearance_997 = df.iloc[32, 13]
+    accuracy_reappearance_683 = df.iloc[34, 11]
+    accuracy_reappearance_95 = df.iloc[34, 12]
+    accuracy_reappearance_997 = df.iloc[34, 13]
+    pe = df.iloc[32, 14]
+    miss = df.iloc[37, 22]
+    second_star_visible = df.iloc[39, 3]
+    sn = df.iloc[39, 22]
+    y_val_d = df.iloc[25, 9]
+    y_val_r = df.iloc[25, 15]
+
 
     return {
         "event_date": event_date,
@@ -91,7 +141,47 @@ def extract_fields(file_path):
         "pos_neg": pos_neg,
         "observer": observer,
         "email": email,
-        "location": location
+        "location": location,
+        "coords_datum": coords_datum,
+        "elevation_value": elevation_value,
+        "elevation_unit": elevation_unit,
+        "aperture_value": aperture_value,
+        "aperture_unit": aperture_unit,
+        "f_ratio": telescope_f_ratio,
+        "magnification": telescope_magnification, 
+        "telescope_type": telescope_type,
+        "timing": timing,
+        "timing_device": timing_device,
+        "method": method,
+        "ote_used": ote_used,
+        "asteroid_visible": asteroid_visible,
+        "detector": detector,
+        "video_format": video_format,
+        "exposure_integration": exposure_integration,
+        "other_detector_info": other_detector_info,
+        "clouds": clouds,
+        "stability": stability,
+        "other_conditions": other_conditions,
+        "started_observing": create_time_with_microseconds(started_observing_hh, started_observing_mm, started_observing_ss),
+        "uncorrected_disappearance": create_time_with_microseconds(uncorrected_disappearance_hh, uncorrected_disappearance_mm, uncorrected_disappearance_ss),
+        "corrected_disappearance": create_time_with_microseconds(corrected_disappearance_hh, corrected_disappearance_mm, corrected_disappearance_ss),
+        "corrected_reappearance": create_time_with_microseconds(corrected_reappearance_hh, corrected_reappearance_mm, corrected_reappearance_ss),
+        "uncorrected_reappearance": create_time_with_microseconds(uncorrected_reappearance_hh, uncorrected_reappearance_mm, uncorrected_reappearance_ss),
+        "stopped_observing": create_time_with_microseconds(stopped_observing_hh, stopped_observing_mm, stopped_observing_ss),
+        "accuracy_disappearance_683": accuracy_disappearance_683,
+        "accuracy_disappearance_95": accuracy_disappearance_95,
+        "accuracy_disappearance_997": accuracy_disappearance_997,
+        "accuracy_reappearance_683": accuracy_reappearance_683,
+        "accuracy_reappearance_95": accuracy_reappearance_95,
+        "accuracy_reappearance_997": accuracy_reappearance_997,
+        "pe": pe,
+        "miss": miss,
+        "second_star_visible": second_star_visible,
+        "sn": sn,
+        "y_val_d": y_val_d,
+        "y_val_r": y_val_r
+
+
     }
 
 def normalize_coords(
