@@ -3,6 +3,7 @@ import pandas as pd
 from tqdm import tqdm
 from pathlib import Path
 from datetime import time
+import argparse
 
 VALID_GPS_FORMATS = [
     'deg min.mmm',
@@ -258,11 +259,14 @@ def normalize_coords(
     return gps_coords
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python main.py <source_dir>")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Process Excel files and extract specific fields.")
+    parser.add_argument("source_dir", type=str, help="Directory containing the Excel files to process.")
+    parser.add_argument("output_file_name", type=str, help="Name of the output Excel file.")
+    
+    args = parser.parse_args()
 
-    source_dir = Path(sys.argv[1])
+    source_dir = Path(args.source_dir)
+    output_file_name = args.output_file_name
 
     if not source_dir.is_dir():
         print(f"Error: {source_dir} is not a valid directory")
@@ -288,8 +292,12 @@ def main():
         except Exception as e:
             errors.append((file, str(e)))
 
+    output_dir = Path('output')
+    output_dir.mkdir(exist_ok=True)
+    output_file_path = output_dir / output_file_name
+
     output_df = pd.DataFrame(results)
-    output_df.to_excel("output.xlsx", index=False)
+    output_df.to_excel(output_file_path, index=False)
 
     if errors:
         print("\nErrors encountered:")
