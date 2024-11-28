@@ -10,6 +10,12 @@ VALID_GPS_FORMATS = [
     'deg.ddddd'
 ]
 COORDS_DESIRED_FORMAT = 'deg.ddddd'
+SUPPORTED_FORM_VERSION = 'V5.6.11'
+
+def create_time_with_microseconds(hh, mm, ss):
+    seconds_int = int(ss)
+    microseconds = int((ss - seconds_int) * 1_000_000)
+    return time(hh, mm, seconds_int, microseconds)
 
 def extract_fields(file_path):
     try:
