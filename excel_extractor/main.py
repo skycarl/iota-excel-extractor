@@ -25,6 +25,10 @@ def extract_fields(file_path):
             return None
         else:
             raise
+
+    form_version = df.iloc[1, 25]
+    if form_version != SUPPORTED_FORM_VERSION:
+        raise ValueError(f"Unsupported form version found in {file_path}: {form_version}. Expected {SUPPORTED_FORM_VERSION}")
     
     # Extract year, month, and day
     year = int(df.iloc[4, 3])
