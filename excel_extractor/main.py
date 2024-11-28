@@ -2,6 +2,7 @@ import argparse
 import sys
 from datetime import time
 from pathlib import Path
+import re
 
 import pandas as pd
 from tqdm import tqdm
@@ -12,7 +13,7 @@ VALID_GPS_FORMATS = [
     'deg.ddddd'
 ]
 COORDS_DESIRED_FORMAT = 'deg.ddddd'
-SUPPORTED_FORM_VERSION = 'V5.6.11'
+SUPPORTED_FORM_VERSION_PREFIX = '5.6.'
 
 def create_time_with_microseconds(hh, mm, ss):
     seconds_int = int(ss)
@@ -29,8 +30,9 @@ def extract_fields(file_path):
             raise
 
     form_version = df.iloc[1, 25]
-    if form_version != SUPPORTED_FORM_VERSION:
-        raise ValueError(f"Unsupported form version found in {file_path}: {form_version}. Expected {SUPPORTED_FORM_VERSION}")
+    match = re.search(r'V(\d+\.\d+\.\d+)', form_version)
+    if not match or not match.group(1).startswith(SUPPORTED_FORM_VERSION_PREFIX):
+        raise ValueError(f"Unsupported form version found in {file_path}: {form_version}. Expected {SUPPORTED_FORM_VERSION_PREFIX}x")
     
     # Extract year, month, and day
     year = int(df.iloc[4, 3])
