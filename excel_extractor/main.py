@@ -1,9 +1,10 @@
+import argparse
 import sys
+from datetime import time
+from pathlib import Path
+
 import pandas as pd
 from tqdm import tqdm
-from pathlib import Path
-from datetime import time
-import argparse
 
 VALID_GPS_FORMATS = [
     'deg min.mmm',
