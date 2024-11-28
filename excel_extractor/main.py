@@ -304,5 +304,13 @@ def main():
         for file, error in errors:
             print(f"File: {file}\nError: {error}\n")
 
+    total_files = len(excel_files)
+    succeeded_files = len(results)
+    failed_files = len(errors)
+
+    print(f"\nTotal files found: {total_files}")
+    print(f"Number of files succeeded: {succeeded_files}")
+    print(f"Number of files failed: {failed_files}")
+
 if __name__ == "__main__":
     main()
