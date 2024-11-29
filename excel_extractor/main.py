@@ -16,9 +16,15 @@ COORDS_DESIRED_FORMAT = 'deg.ddddd'
 SUPPORTED_FORM_VERSION_PREFIX = '5.6.'
 
 def create_time_with_microseconds(hh, mm, ss):
+    if hh is None and mm is None and ss is None:
+        return None
+    if all(isinstance(x, str) and x.isspace() for x in [hh, mm, ss]):
+        return None
+    if any(isinstance(x, float) and x != x for x in [hh, mm, ss]):  # Check for NaN
+        return None
     seconds_int = int(ss)
     microseconds = int((ss - seconds_int) * 1_000_000)
-    return time(hh, mm, seconds_int, microseconds)
+    return f"{hh:02}:{mm:02}:{seconds_int:02}.{microseconds:06}"
 
 def extract_fields(file_path):
     try:
@@ -135,6 +141,7 @@ def extract_fields(file_path):
 
 
     return {
+        "file_path": str(file_path),
         "event_date": event_date,
         "asteroid_number": asteroid_number,
         "asteroid_name": asteroid_name,
