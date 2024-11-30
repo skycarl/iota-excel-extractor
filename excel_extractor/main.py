@@ -51,7 +51,7 @@ def extract_fields(file_path):
     # Assemble into ISO-8601 style date
     event_date = f"{year:04d}-{month_number:02d}-{day:02d}"
 
-    asteroid_number = df.iloc[6, 4]
+    asteroid_number = int(df.iloc[6, 4].strip())
     asteroid_name = df.iloc[6, 10]
     star_catalog = df.iloc[6, 18]
     star_number = df.iloc[6, 23]
