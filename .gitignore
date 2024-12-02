@@ -5,3 +5,4 @@ notebooks/
 *.xlsx
 output/
 .DS_Store
+*.pyc
